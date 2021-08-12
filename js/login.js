@@ -3,4 +3,8 @@
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
 
+    document.getElementById("loginBTN").onclick = function(e) {
+        window.location.href="./index.html"
+    };
+
 });
