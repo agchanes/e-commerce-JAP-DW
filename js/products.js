@@ -21,9 +21,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 let soldcount = productNumber.soldCount
 
 
-
-
-
                 document.getElementById("list-container").innerHTML +=
                 `
                 <div class="row">
