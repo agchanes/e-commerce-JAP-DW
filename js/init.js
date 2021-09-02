@@ -43,5 +43,11 @@ var getJSONData = function(url){
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+
+
+//con esto llamamos al username en el storage y lo ponemos en el div
 document.addEventListener("DOMContentLoaded", function(e){
+
+  document.getElementsByName("userName")[0].textContent = localStorage.getItem("username");
+
 });
