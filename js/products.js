@@ -3,6 +3,7 @@
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
 
+
     fetch(PRODUCTS_URL)
         .then(result => result.json())
         .then(data => {
@@ -11,15 +12,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         });
 
-        let misDatos = localStorage.getItem("products");
-        let misDatosJSON = JSON.parse(misDatos) 
+    let misDatos = localStorage.getItem("products");
+    let misDatosJSON = JSON.parse(misDatos)
 
-        function listaProductos() {
+    function listProducts() {
 
-            document.getElementById("list-container").innerHTML = ""
-            
-            let i = 0
-            while (i < misDatosJSON.length) {
+        productList = ""
+        let minCost = document.getElementById("minCost").value;
+        let maxCost = document.getElementById("maxCost").value;
+
+
+        for (let i = 0; i < misDatosJSON.length; i++) {
 
             let productNumber = misDatosJSON[i]
 
@@ -31,52 +34,95 @@ document.addEventListener("DOMContentLoaded", function (e) {
             let soldcount = productNumber.soldCount
 
 
-            document.getElementById("list-container").innerHTML +=
-            `
-            <div class="row">
-                <div class="col-3">
-                    <img src="` + img + `" alt="` + name + `" class="img-thumbnail">
-                </div>
-                <div class="col">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">`+ name + `</h4>
-                        <small class="text-muted"> Vendidos: ` + soldcount +`<hr>`+ currency +` `+ cost +`</small>
+            if (minCost < cost && cost < maxCost) {
+                productList +=
+                    `
+                    <a href="product-info.html" class="list-group-item list-group-item-action">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="` + img + `" alt="` + name + `" class="img-thumbnail">
                     </div>
-                    <p class="mb-1">` + description + `</p>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">`+ name + `</h4>
+                            <small class="text-muted"> Vendidos: ` + soldcount + `<hr>` + currency + ` ` + cost + `</small>
+                        </div>
+                        <p class="mb-1">` + description + `</p>
+                    </div>
                 </div>
-            </div>
-            `
-            i++
+                </a>
+                `
+
+            } else {
+                if (minCost === "" && maxCost === "") {
+
+                    productList +=
+                        `<a href="product-info.html" class="list-group-item list-group-item-action">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="` + img + `" alt="` + name + `" class="img-thumbnail">
+                    </div>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">`+ name + `</h4>
+                            <small class="text-muted"> Vendidos: ` + soldcount + `<hr>` + currency + ` ` + cost + `</small>
+                        </div>
+                        <p class="mb-1">` + description + `</p>
+                    </div>
+                </div>
+                </a>
+                `
+                }
+            }
         }
+        document.getElementById("list-container").innerHTML = productList
     }
 
     function sortByCostAZ() {
-        misDatosJSON.sort(function(a, b){return a.cost - b.cost});
+        misDatosJSON.sort(function (a, b) { return a.cost - b.cost });
     };
 
     function sortByCostDZ() {
-        misDatosJSON.sort(function(a, b){return b.cost - a.cost});
+        misDatosJSON.sort(function (a, b) { return b.cost - a.cost });
     };
 
     function sortBySells() {
-        misDatosJSON.sort(function(a, b){return b.soldCount - a.soldCount});
+        misDatosJSON.sort(function (a, b) { return b.soldCount - a.soldCount });
     }
-    
-    document.getElementById("sortCostAZBTN").onclick = function(){
+
+    function cleanFilter(){
+        document.getElementById("minCost").value = ""
+        document.getElementById("maxCost").value = ""
+    }
+
+    document.getElementById("sortCostAZBTN").onclick = function () {
         sortByCostAZ();
-        listaProductos();
-    }  
+        listProducts();
+    }
 
-    document.getElementById("sortCostDZBTN").onclick = function(){
+    document.getElementById("sortCostDZBTN").onclick = function () {
         sortByCostDZ();
-        listaProductos();
-    }  
+        listProducts();
+    }
 
-    document.getElementById("sortSellsBTN").onclick = function(){
+    document.getElementById("sortSellsBTN").onclick = function () {
         sortBySells();
-        listaProductos();
-    }  
-    
-    listaProductos();
+        listProducts();
+    }
+
+    document.getElementById("costFilterBTN").onclick = function () {
+        listProducts();
+    }
+
+    document.getElementById("cleanFilterBTN").onclick = function () {
+        cleanFilter();
+        listProducts();
+    }
+
+    function redirect(){
+        window.location.href="product-info.html"
+    }
+
+    listProducts();
 
 });

@@ -33,9 +33,14 @@
         <p class="lead">Verás aquí todas los productos del sitio.</p>
     </div>
 
-    <button id="sortCostAZBTN">Precio mayor a menor</button>
-    <button id="sortCostDZBTN">Precio mayor a menor</button>
-    <button id="sortSellsBTN">Mayor Relevancia</button>
+    <button id="sortCostAZBTN" class="btn btn-secondary">Precio menor a mayor</button>
+    <button id="sortCostDZBTN" class="btn btn-secondary">Precio mayor a menor</button>
+    <button id="sortSellsBTN" class="btn btn-secondary">Mayor Relevancia</button>
+    <br>
+    Costo mínimo<input  type="number" id="minCost">
+    Costo máximo<input type="number" id="maxCost">
+    <button id="costFilterBTN" class="btn btn-secondary">Filtrar</button>
+    <button id="cleanFilterBTN" class="btn btn-secondary">Limpiar Filtro</button>
 
     <div id="list-container"></div>
   </main>
