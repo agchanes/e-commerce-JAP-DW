@@ -5,17 +5,19 @@ var product = {};
 
 let commentList = ""
 
+let relatedProducts = []
+
 var today = new Date();
 
 document.addEventListener("DOMContentLoaded", function (e) {
 
-    function showImagesGallery(array) {
+    function showGallery(array) {
 
         let gallery = "";
-    
+
         for (let i = 0; i < array.length; i++) {
             let imageSrc = array[i];
-    
+
             gallery += `
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="d-block mb-4 h-100">
@@ -23,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 </div>
             </div>
             `
-    
+
             document.getElementById("productImagesGallery").innerHTML = gallery;
         }
     }
@@ -49,8 +51,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 productSoldCountHTML.innerHTML = product.soldCount;
                 productCategoryHTML.innerHTML = product.category;
 
-                //Muestro las imagenes en forma de galería
-                showImagesGallery(product.images);
+                relatedProducts = product.relatedProducts
+
+                showGallery(product.images);
             })
     }
 
@@ -88,6 +91,53 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
                 document.getElementById("productComments-container").innerHTML = commentList
             })
+    }
+
+    function showRelatedProducts() {
+
+        fetch(PRODUCTS_URL)
+            .then(result => result.json())
+            .then(data => {
+                products = data;
+
+                let productList = ""
+
+
+                for (let i = 0; i < relatedProducts.length; i++) {
+
+                    let related = relatedProducts[i]
+
+
+                    let name = products[related].name
+                    let description = products[related].description
+                    let cost = products[related].cost
+                    let currency = products[related].currency
+                    let img = products[related].imgSrc
+                    let soldcount = products[related].soldCount
+
+
+                        productList +=
+                            `
+                            <a href="product-info.html" class="list-group-item list-group-item-action">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="` + img + `" alt="` + name + `" class="img-thumbnail">
+                            </div>
+                            <div class="col">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h4 class="mb-1">`+ name + `</h4>
+                                    <small class="text-muted"> Vendidos: ` + soldcount + `<hr>` + currency + ` ` + cost + `</small>
+                                </div>
+                                <p class="mb-1">` + description + `</p>
+                            </div>
+                        </div>
+                        </a>
+                        `
+
+                    }   
+                    document.getElementById("relatedProducts").innerHTML = productList
+                    
+                })
     }
 
     function readStars() {
@@ -161,8 +211,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
         sendComment();
     }
 
-    
+
     showInfo();
 
     showComments();
+
+    showRelatedProducts()
 })
