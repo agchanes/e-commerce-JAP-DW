@@ -50,4 +50,9 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   document.getElementsByName("userName")[0].textContent = localStorage.getItem("username");
 
+  document.getElementsByName("signOutBTN")[0].onclick = function(){
+    localStorage.setItem("username","");
+    window.location.href = "index.html"
+  }
+
 });

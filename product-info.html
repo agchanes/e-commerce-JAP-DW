@@ -25,7 +25,17 @@
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <div class="py-2 d-none d-md-inline-block" name="userName" style="color: aliceblue;"></div>
+      <div class="py-2 d-none d-md-inline-block"></div>
+      
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" name="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <button class="dropdown-item" type="button" name="signOutBTN">Cerrar sesión</button>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -101,11 +111,12 @@
       <br>
       <h3>Relacionados:</h3>
       <hr class="my-3">
-      <p id="relatedProducts"></p>
+      <div id="relatedProducts"></div>
+        
+
 
       <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
-    </div>
-
+    
 
 
 
@@ -147,3 +158,4 @@
 </body>
 
 </html>
+
