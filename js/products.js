@@ -1,19 +1,25 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+
+
+
 document.addEventListener("DOMContentLoaded", function (e) {
 
+    let misDatosJSON = []
 
     fetch(PRODUCTS_URL)
         .then(result => result.json())
         .then(data => {
 
-            localStorage.setItem("products", JSON.stringify(data));
+            console.log(data)
 
-        });
 
-    let misDatos = localStorage.getItem("products");
-    let misDatosJSON = JSON.parse(misDatos)
+            misDatosJSON = data
+
+            listProducts();
+    });
+
 
     function listProducts() {
 
@@ -37,40 +43,36 @@ document.addEventListener("DOMContentLoaded", function (e) {
             if (minCost < cost && cost < maxCost) {
                 productList +=
                     `
-                    <a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + img + `" alt="` + name + `" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ name + `</h4>
-                            <small class="text-muted"> Vendidos: ` + soldcount + `<hr>` + currency + ` ` + cost + `</small>
-                        </div>
-                        <p class="mb-1">` + description + `</p>
-                    </div>
-                </div>
-                </a>
+                    <div class="col-md-4">
+                    <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+                      <img class="bd-placeholder-img card-img-top"  src="${img}">
+                      <h3 class="m-3">${name}</h3>
+                      <h5 class="ml-3">${currency} ${cost}</h3>
+                      <div class="card-body">
+                        <p class="card-text">${description}</p>
+                        <small class="card-text">${soldcount} vendidos</small>
+                      </div>
+                    </a>
+                  </div>
+
                 `
 
             } else {
                 if (minCost === "" && maxCost === "") {
 
                     productList +=
-                        `<a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + img + `" alt="` + name + `" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ name + `</h4>
-                            <small class="text-muted"> Vendidos: ` + soldcount + `<hr>` + currency + ` ` + cost + `</small>
-                        </div>
-                        <p class="mb-1">` + description + `</p>
-                    </div>
-                </div>
-                </a>
+                        `                   
+                        <div class="col-md-4">
+                        <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+                          <img class="bd-placeholder-img card-img-top"  src="${img}">
+                          <h3 class="m-3">${name}</h3>
+                          <h5 class="ml-3">${currency} ${cost}</h3>
+                          <div class="card-body">
+                            <p class="card-text">${description}</p>
+                            <small class="card-text">${soldcount} vendidos</small>
+                          </div>
+                        </a>
+                      </div>
                 `
                 }
             }
@@ -90,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         misDatosJSON.sort(function (a, b) { return b.soldCount - a.soldCount });
     }
 
-    function cleanFilter(){
+    function cleanFilter() {
         document.getElementById("minCost").value = ""
         document.getElementById("maxCost").value = ""
     }
@@ -119,10 +121,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
         listProducts();
     }
 
-    function redirect(){
-        window.location.href="product-info.html"
+
+
+    document.getElementsByClassName("cleanFilterBTN").onclick = function () {
+        cleanFilter();
+        listProducts();
     }
 
-    listProducts();
 
 });
+
+
+function redirect(algo) {
+    localStorage.setItem("currentAuto", algo)
+}

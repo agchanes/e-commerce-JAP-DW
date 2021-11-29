@@ -43,7 +43,8 @@
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
       <div class="py-2 d-none d-md-inline-block"></div>
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" name="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle" type="button" name="userName" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
@@ -53,14 +54,85 @@
       </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+
+
+  <div class="container">
+    <div class="text-center p-4">
+      <h2>Mi perfil</h2>
+      <p class="lead">Aquí puedes acceder a todos los datos de tu perfil</p>
+
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-8 order-md-1">
+
+
+
+        <h4 class="mb-3">Datos Personales</h4>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="productName">Nombre/s</label>
+            <input type="text" class="form-control" id="nameInput" placeholder="" value="" readonly>
+
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="productName">Apellidos</label>
+            <input type="text" class="form-control" id="lastNameInput" placeholder="" value="" readonly>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="productName">Edad</label>
+            <input type="number" class="form-control" id="ageInput" placeholder="" value="" readonly>
+
+          </div>
+        </div>
+        <hr class="mb-4">
+
+
+        <h4 class="mb-3">Datos de usuario</h4>
+
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="productName">Nombre de usuario</label>
+            <input type="text" class="form-control" id="usernameInput" placeholder="" value="" readonly>
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="productName">Correo electrónico</label>
+            <input type="email" class="form-control" id="mailInput" placeholder="" value="" readonly>
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="productName">Teléfono</label>
+            <input type="tel" class="form-control" id="telInput" placeholder="" value="" readonly>
+
+          </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary" id="modifyBTN" name="papa">Modificar datos</button>
+        <button class="btn btn-primary" id="saveBTN">Guardar cambios</button>
+        <hr class="mb-4">
+      </div>
     </div>
   </div>
+  </div>
+
+
+
+
+
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>

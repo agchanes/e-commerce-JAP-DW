@@ -433,7 +433,7 @@ var Dropzone = function (_Emitter) {
          * If you provide a  fallback element yourself, or if this option is `null` this will
          * be ignored.
          */
-        dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
+        dictFallbackText: "Please use the fallback form below to upload your files like in the olden Días.",
 
         /**
          * If the filesize is too big.

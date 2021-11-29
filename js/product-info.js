@@ -7,7 +7,7 @@ let commentList = ""
 
 let relatedProducts = []
 
-var today = new Date();
+var toDía = new Date();
 
 document.addEventListener("DOMContentLoaded", function (e) {
 
@@ -180,8 +180,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
         let score = readStars();
         let user = localStorage.getItem("username");
         let commentText = document.getElementById("commentText").value
-        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let date = toDía.getFullYear() + '-' + (toDía.getMonth() + 1) + '-' + toDía.getDate();
+        let time = toDía.getHours() + ":" + toDía.getMinutes() + ":" + toDía.getSeconds();
 
 
         document.getElementById("productComments-container").innerHTML +=

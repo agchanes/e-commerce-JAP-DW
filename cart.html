@@ -42,10 +42,11 @@
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
 
-      
+
       <div class="py-2 d-none d-md-inline-block"></div>
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" name="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle" type="button" name="userName" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
@@ -53,17 +54,228 @@
           <button class="dropdown-item" type="button" name="signOutBTN">Cerrar sesión</button>
         </div>
       </div>
-     </div>
+    </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+
+  <div class="container">
+    <div class="text-center p-4">
+      <h2>Mi carrito</h2>
+      <p class="lead">Aquí puedes los productos que agregaste a tu carrito</p>
+    </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Información del producto</h4>
+        <br>
+        <div id="cart-container"></div>
+        <br>
+        <form class="needs-validation" id="cart-info">
+          <h4>Envío</h4>
+          <h5 class="mb-3">Seleccione tipo de envío</h5>
+
+          <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+              <input id="premiumRadio" name="publicationType" type="radio" class="custom-control-input" required=""
+                onchange="setTotal()">
+              <label class="custom-control-label" for="premiumRadio">Premium (2 a 5 días) - 15% sobre el subtotal</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="expressRadio" name="publicationType" type="radio" class="custom-control-input" required=""
+                onchange="setTotal()">
+              <label class="custom-control-label" for="expressRadio">Express (5 a 8 días) - 7% sobre el subtotal</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="standardRadio" name="publicationType" type="radio" class="custom-control-input" required="" checked
+                onchange="setTotal()">
+              <label class="custom-control-label" for="standardRadio">Estándar (12 a 15 días) - 5% sobre el
+                subtotal</label>
+            </div>
+            <div class="row">
+              <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">Ver
+                condiciones</button>
+            </div>
+          </div>
+          <hr class="mb-4">
+
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <h5 class="mb-3">Dirección de envío</h5>
+              <label for="streetInput">Calle</label>
+              <input type="text" class="form-control" id="streetInput" placeholder="" value="" onchange="modalDisplayConditions()">
+              <div class="invalid-feedback">
+                Ingresa una calle
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="numbertName">Número de Puerta</label>
+              <input type="number" class="form-control" id="numberInput" placeholder="" value="" onchange="modalDisplayConditions()">
+              <div class="invalid-feedback">
+                Ingresa el número de puerta
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="esquinaInput">Esquina</label>
+              <input type="text" class="form-control" id="esquinaInput" placeholder="" value="" onchange="modalDisplayConditions()">
+              <div class="invalid-feedback">
+                Ingresa la esquina
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="countryInput">País</label>
+              <input type="text" class="form-control" id="countryInput" placeholder="" value="" onchange="modalDisplayConditions()">
+              <div class="invalid-feedback">
+                Ingresa el país
+              </div>
+            </div>
+          </div>
+
+          <hr class="mb-4">
+
+          <div class="text-center container list-group-item">
+            <div class="row">
+              <div class="col">
+                <h5 id="total-container" class="mt-2"></h5>
+              </div>
+
+              <div class="col">
+                <!-- Button trigger modal -->
+                <button id="modalBTN" type="submit" class="btn btn-primary">
+                  Elejir medio de pago
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Medios de Pago</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-check text-left">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="standardRadio">
+                          <label class="form-check-label h5">
+                            Tarjeta de crédito
+                          </label>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                          <div class="col-md-8 mb-3">
+                            <label for="productName">Número de tarjeta</label>
+                            <input type="number" class="form-control" id="nameInput" placeholder="" value="">
+                          </div>
+
+                          <div class="col-md-4 mb-3">
+                            <label for="productName">Código de seg.</label>
+                            <input type="number" class="form-control" id="lastNameInput" placeholder="" value="">
+                          </div>
+
+                          <div class="col-md-6 mb-3">
+                            <label for="productName">Vencimiento</label>
+                            <input type="date" class="form-control" id="lastNameInput" placeholder="" value="">
+                          </div>
+
+                        </div>
+                        <hr>
+
+
+                        <div class="form-check text-left">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="standardRadio">
+                          <label class="form-check-label h5">
+                            Transferencia bancaria
+                          </label>
+                        </div>
+                        <br>
+
+                        <div class="row">
+
+                          <div class="col-md-8 mb-3">
+                            <label for="productName">Número de cuenta</label>
+                            <input type="number" class="form-control" id="nameInput" placeholder="" value="">
+                          </div>
+                        </div>
+
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+                        <button type="button" class="btn btn-primary">Confirmar pago</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+        </form>
+      </div>
     </div>
   </div>
+
+  <div class="alert fade" role="alert" id="alertResult">
+    <span id="resultSpan"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Condiciones de publicación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <h5 class="text-warning">Gold (13%)</h5>
+                <p class="muted text-justify">Tu producto se verá de forma promocionada en portada, además de las condiciones de Premium y Estándar.</p>
+            </div>
+            <hr>
+            <div class="row">
+                <h5 class="text-primary">Stándar (7%)</h5>
+                <p class="muted text-justify">Se mostrará el producto en los primeros lugares de resultados de búsqueda, así cómo cuando se ingrese a la categoría que pertenezca.</p>
+            </div>
+            <hr>
+            <div class="row">
+                <h5 class="text-secondary">Estándar (3%)</h5>
+                <p class="muted text-justify">El producto se listará en la categoría correspondiente, así como en los resultados de búsquedas que coincidan con las palabras claves en el nombre.</p>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
